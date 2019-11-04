@@ -89,18 +89,18 @@ router.put("/:id", auth, async (req, res) => {
       { $set: contactFields },
       { new: true }
     );
+
     res.json(contact);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
-  // res.send("Update contact");
 });
 
 // @route   DELETE api/contacts
 // @desc    Delete contact
 // @access  Private
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     let contact = await Contact.findById(req.params.id);
 
@@ -111,8 +111,8 @@ router.delete("/:id", (req, res) => {
       return res.status(401).json({ msg: "Not authorized" });
     }
 
-    await Contact.findByIdAndRemove(req.params.id)
-    res.json({msg: "contact removed"});
+    await Contact.findByIdAndRemove(req.params.id);
+    res.json({ msg: "contact removed" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
