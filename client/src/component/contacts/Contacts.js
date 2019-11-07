@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
+import ContactItem from "./ContactItem";
 import ContactContext from "../../context/contact/ContactContext";
-import ContactState from "../../context/contact/ContactState";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
@@ -9,7 +9,7 @@ const Contacts = () => {
   return (
     <Fragment>
       {contacts.map(contact => (
-        <h3>{contact.name}</h3>
+        <ContactItem key={contact.id} contact={contact} />
       ))}
     </Fragment>
   );
