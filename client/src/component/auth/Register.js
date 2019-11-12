@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AlertContext from "../../context/alert/AlertContext";
 import AuthContext from "../../context/auth/AuthContext";
 
@@ -7,8 +7,14 @@ const Register = () => {
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
+  const { register, error, clearErrors } = authContext;
 
-  const { register } = authContext;
+  useEffect(() => {
+    if (error === "User already exists") {
+      setAlert(error, "danger");
+      clearErrors();
+    }
+  }, [error]);
 
   const [user, setUser] = useState({
     name: "",
