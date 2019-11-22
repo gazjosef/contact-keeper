@@ -8,9 +8,15 @@ import About from "./component/pages/About";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
 import Alerts from "./component/layout/Alerts";
+
 import ContactState from "./context/contact/ContactState";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
+import setAuthToken from "./utils/setAuthToken";
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
   return (
